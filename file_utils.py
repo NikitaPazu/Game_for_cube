@@ -50,14 +50,16 @@ def read_config_json():
             return json.load(config)
     except FileNotFoundError as e:
         return {
-            "width": 300,
-            "height": 300,
-            "framerate": 20,
+            "width": 450,
+            "height": 450,
+            "framerate": 25,
             "colors": {
                 "red": (255, 0, 0),
                 "green": (0, 255, 0),
                 "blue": (0, 0, 255),
-                "black": (0, 0, 0)
+                "black": (0, 0, 0),
+                "white": (255, 255, 255),
+                "yellow": (255, 255, 0),
             }
         }
 

@@ -4,13 +4,13 @@ import file_utils
 config = file_utils.read_config_json()
 
 
-class Spaceship(pygame.sprite.Sprite):
+class Enemy_Spaceship(pygame.sprite.Sprite):
     def __init__(self, *groups):
         super().__init__(*groups)
 
         self.images = [
-            pygame.image.load("./assets/enemy_space_ship.png.png"),
-            pygame.image.load("./assets/enemy_space_ship.png")
+            pygame.image.load("Sprites/Assets/enemy_space_ship.png"),
+            pygame.image.load("Sprites/Assets/enemy_space_ship.png")
         ]
         self.images = list(map(
             lambda x: pygame.transform.scale(
@@ -85,3 +85,5 @@ class Spaceship(pygame.sprite.Sprite):
             "y": self.rect.y,
         }
         return dictionary
+
+    # pygame.image.load("./assets/enemy_space_ship.png.png"),

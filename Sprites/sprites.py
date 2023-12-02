@@ -12,11 +12,13 @@ class Player(Sprite):
         self.index = 0
 
         self.images = [
-            image.load("Assets/spaceship.png"),
-            image.load("Assets/spaceship.png.png")
+            image.load("spaceship.png"),
+            image.load("enemy_space_ship.png"),
+            image.load("spaceship_bullet.png"),
+            image.load("enemy_spaceship_bullet.png")
         ]
         self.images = list(map(
-            lambda x: transform.scale(x, (64, 64)),
+            lambda x: transform.scale(x, (16, 16)),
             self.images
         ))
 
