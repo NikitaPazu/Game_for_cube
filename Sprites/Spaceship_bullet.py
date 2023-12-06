@@ -1,16 +1,17 @@
 import pygame
 import file_utils
 
+
 config = file_utils.read_config_json()
 
 
-class Enemy_Space_ship_bullet(pygame.sprite.Sprite):
+class Spaceship_bullet(pygame.sprite.Sprite):
     def __init__(self, *groups):
         super().__init__(*groups)
 
         self.images = [
-            pygame.image.load("Sprites/Assets/enemy_spaceship_bullet.png"),
-            pygame.image.load("Sprites/Assets/enemy_spaceship_bullet.png")
+            pygame.image.load("Sprites/Assets/spaceship_bullet.png"),
+            pygame.image.load("Sprites/Assets/spaceship_bullet.png")
         ]
         self.images = list(map(
             lambda x: pygame.transform.scale(
@@ -33,26 +34,26 @@ class Enemy_Space_ship_bullet(pygame.sprite.Sprite):
     def update(self, *args, **kwargs):
         key = pygame.key.get_pressed()
 
-        # управление по Y
-    # if key[pygame.K_w]:
-    #     if self.speed < 20:
-        self.speed += 1
-    # elif self.speed > 0:
-    #     self.speed -= 0.5
-    #     if key[pygame.K_SPACE]:
-    #         if self.speed == 0:
-    #             self.image = self.images[0]
-    #         if self.speed != 0:
-    #             self.image = self.images[1]
-    #             self.speed -= 1 if self.speed > 0 else -1
-    #     if key[pygame.K_s] and self.speed <= 0:
-    #         if self.speed > -5:
-    #     self.speed -= 2
-    #     # управление по X
-        # if key[pygame.K_a] and self.deg != 50:
-        #     self.deg += 5
-        # if key[pygame.K_d] and self.deg != -50:
-        #     self.deg -= 5
+        # # управление по Y
+        if key[pygame.K_w]:
+            if self.speed < 20:
+                self.speed += 1
+        elif self.speed > 0:
+            self.speed -= 0.5
+        if key[pygame.K_SPACE]:
+            if self.speed == 0:
+                self.image = self.images[0]
+            if self.speed != 0:
+                self.image = self.images[1]
+                self.speed -= 1 if self.speed > 0 else -1
+        if key[pygame.K_s] and self.speed <= 0:
+            if self.speed > -5:
+                self.speed -= 1
+        # управление по X
+        if key[pygame.K_a] and self.deg != 50:
+            self.deg += 5
+        if key[pygame.K_d] and self.deg != -50:
+            self.deg -= 5
 
     def calc_vector(self):
         self.direction = (self.rect.center,
@@ -86,4 +87,4 @@ class Enemy_Space_ship_bullet(pygame.sprite.Sprite):
         }
         return dictionary
 
-    # pygame.image.load("./assets/enemy_space_ship.png.png"),
+    # pygame.image.load("./Assets/spaceship.png"),
