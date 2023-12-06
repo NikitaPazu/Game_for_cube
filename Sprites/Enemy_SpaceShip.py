@@ -47,12 +47,12 @@ class Enemy_Spaceship(pygame.sprite.Sprite):
         #         self.speed -= 1 if self.speed > 0 else -1
         # if key[pygame.K_s] and self.speed <= 0:
         #     if self.speed > -5:
-        self.speed -= 2
+        self.speed += 2
         # управление по X
         # if key[pygame.K_a] and self.deg != 50:
         #     self.deg += 5
         # if key[pygame.K_d] and self.deg != -50:
-        #     self.deg -= 5
+        #     self.deg -= 548'p8
 
     def calc_vector(self):
         self.direction = (self.rect.center,

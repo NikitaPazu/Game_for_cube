@@ -60,6 +60,7 @@ def read_config_json():
                 "black": (0, 0, 0),
                 "white": (255, 255, 255),
                 "yellow": (255, 255, 0),
+                "cyan": (0, 255, 255),
             }
         }
 
