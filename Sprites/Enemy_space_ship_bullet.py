@@ -22,7 +22,7 @@ class Enemy_Space_ship_bullet(pygame.sprite.Sprite):
         self.image = self.images[0]
         self.rect = self.image.get_rect()
 
-        self.rect.center = (config['width'] // 2, config['height'] // 2)
+        self.rect.center = (config['width'] // 5, config['height'] // 5)
 
         self.speed = 0
         self.deg = 50  # -50d <= 0 <= 50d

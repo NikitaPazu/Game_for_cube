@@ -2,6 +2,7 @@ import pygame
 import file_utils
 
 
+
 config = file_utils.read_config_json()
 
 
