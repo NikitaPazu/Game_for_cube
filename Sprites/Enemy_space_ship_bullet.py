@@ -14,8 +14,8 @@ class Enemy_Space_ship_bullet(pygame.sprite.Sprite):
         ]
         self.images = list(map(
             lambda x: pygame.transform.scale(
-                pygame.transform.rotate(x, 180),
-                (230 // 4, 560 // 5)
+                pygame.transform.rotate(x, 0),
+                (256 // 4, 256 // 4)
             ),
             self.images
         ))

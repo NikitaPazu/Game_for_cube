@@ -13,12 +13,12 @@ class Player(Sprite):
 
         self.images = [
             image.load("spaceship.png"),
-            image.load("enemy_space_ship.png"),
             image.load("spaceship_bullet.png"),
+            image.load("enemy_space_ship.png"),
             image.load("enemy_spaceship_bullet.png")
         ]
         self.images = list(map(
-            lambda x: transform.scale(x, (16, 16)),
+            lambda x: transform.scale(x, (32, 32)),
             self.images
         ))
 
@@ -27,8 +27,8 @@ class Player(Sprite):
         self.rect.center = (config.WIDTH / 2, config.HEIGHT / 2)
 
         self.health = 5
-        self.points = 0
-        self.resist = 5
+        # self.points = 0
+        # self.resist = 5
 
         self.speed_x = 0
         self.speed_y = 5

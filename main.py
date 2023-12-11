@@ -57,10 +57,12 @@ while running:
             file_utils.write_json(obj)
             running = False
     pygame.display.flip()
-    Spaceship_group.update()
-    Enemy_spaceship_group.update()
+    Spaceship_group.update(Spaceship, Spaceship_bullet)
+    Enemy_spaceship_group.update(Enemy_Spaceship, Enemy_Space_ship_bullet)
     Space_group.update()
     screen.blit(Space.image, Space.rect)
+    screen.blit(Spaceship.image, Spaceship.rect)
+    # screen.blit(Enemy_Spaceship.image, Enemy_Spaceship.rect)
 
 
 
@@ -73,3 +75,4 @@ pygame.quit()
 clock = pygame.time.Clock()
 
 # screen.fill(config['colors']['black'])  # вот это не работало (насколько я понял)
+# Enemy_Spaceship.image, Enemy_Spaceship.rect
