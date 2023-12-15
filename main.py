@@ -61,8 +61,8 @@ while running:
     Enemy_spaceship_group.update(Enemy_Spaceship, Enemy_Space_ship_bullet)
     Space_group.update()
     screen.blit(Space.image, Space.rect)
-    screen.blit(Spaceship.image, Spaceship.rect)
-    # screen.blit(Enemy_Spaceship.image, Enemy_Spaceship.rect)
+    Spaceship_group.draw((screen))
+    Enemy_spaceship_group.draw((screen))
 
 
 

@@ -24,7 +24,7 @@ class Spaceship(pygame.sprite.Sprite):
         self.image = self.images[0]
         self.rect = self.image.get_rect()
 
-        self.rect.center = (config['width'] // 2, config['height'] // 2)
+        self.rect.center = (config['width'] // 2, config['height'] // 1.5)
 
         self.speed = 0
         self.deg = 50  # -50d <= 0 <= 50d
@@ -35,27 +35,16 @@ class Spaceship(pygame.sprite.Sprite):
     def update(self, *args, **kwargs):
         key = pygame.key.get_pressed()
 
-        # # управление по Y
-        if key[pygame.K_w]:
-            if self.speed < 20:
-                self.speed += 1
-        elif self.speed > 0:
-            self.speed -= 0.5
-        if key[pygame.K_SPACE]:
-            if self.speed == 0:
-                self.image = self.images[0]
-            if self.speed != 0:
-                self.image = self.images[1]
-                self.speed -= 1 if self.speed > 0 else -1
-        if key[pygame.K_s] and self.speed <= 0:
-            if self.speed > -5:
-                self.speed -= 1
         # управление по X
-        if key[pygame.K_a] and self.deg != 50:
-            self.deg += 5
-        if key[pygame.K_d] and self.deg != -50:
-            self.deg -= 5
+        if key[pygame.K_a]:
+            self.rect.x -= 10
+        if key[pygame.K_d]:
+            self.rect.x += 10
+        if self.rect.x < 0:
+            self.rect.x += 255
 
+        if self.rect.x > 450:
+            self.rect.x -= 255
     def calc_vector(self):
         self.direction = (self.rect.center,
                           (self.rect.center[0] + (self.deg if self.speed > 0 else 0),

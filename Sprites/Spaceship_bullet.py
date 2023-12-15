@@ -16,14 +16,14 @@ class Spaceship_bullet(pygame.sprite.Sprite):
         self.images = list(map(
             lambda x: pygame.transform.scale(
                 pygame.transform.rotate(x, 180),
-                (230 // 4, 560 // 5)
+                (230 // 4, 266 // 5)
             ),
             self.images
         ))
         self.image = self.images[0]
         self.rect = self.image.get_rect()
 
-        self.rect.center = (config['width'] // 2, config['height'] // 2)
+        self.rect.center = (config['width'] // 2.01, config['height'] // 1.4)
 
         self.speed = 0
         self.deg = 50  # -50d <= 0 <= 50d
@@ -31,8 +31,7 @@ class Spaceship_bullet(pygame.sprite.Sprite):
         self.old_deg = 0
         # self.calc_vector()
 
-    def update(self, *args, **kwargs):
-        key = pygame.key.get_pressed()
+
 
     # def calc_vector(self):
     #     self.direction = (self.rect.center,
@@ -51,13 +50,16 @@ class Spaceship_bullet(pygame.sprite.Sprite):
     #             self.rect.center[1] - 200,
     #             abs(self.deg),
     #             100
-    #     ), math.pi if self.deg > 0 else 1.5 * math.pi, 0 if self.deg < 0 else 1.5 * math.pi)
-    #     pygame.draw.arc(screen, (0, 255, 0), (
-    #         self.rect.x + (0 if self.deg >= 0 else self.deg),
-    #         self.rect.center[1]- 200,
-    #         abs(self.deg),
-    #         100
-    #     ), math.pi if self.deg > 0 else 1.5 * math.pi, 0 if self.deg < 0 else 1.5 * math.pi)
+    def update(self, *args, **kwargs):
+        key = pygame.key.get_pressed()
+
+        # управление по X
+        if key[pygame.K_SPACE]:
+            self.rect.y -= 100
+
+        if self.rect.y < -50:
+            self.rect.center = (config['width'] // 2.01, config['height'] // 1.4)
+
 
     def to_dict(self):
         dictionary = {

@@ -1,3 +1,5 @@
+import random
+import time
 import pygame
 import file_utils
 
@@ -14,15 +16,15 @@ class Enemy_Spaceship(pygame.sprite.Sprite):
         ]
         self.images = list(map(
             lambda x: pygame.transform.scale(
-                pygame.transform.rotate(x, 180),
-                (230 // 4, 560 // 5)
+                pygame.transform.rotate(x, 0),
+                (256 // 4, 356 // 5)
             ),
             self.images
         ))
         self.image = self.images[0]
         self.rect = self.image.get_rect()
 
-        self.rect.center = (config['width'] // 2, config['height'] // 2)
+        self.rect.center = (config['width'] // 2, config['height'] // 8)
 
         self.speed = 0
         self.deg = 50  # -50d <= 0 <= 50d
@@ -49,10 +51,25 @@ class Enemy_Spaceship(pygame.sprite.Sprite):
         #     if self.speed > -5:
         self.speed += 2
         # управление по X
-        # if key[pygame.K_a] and self.deg != 50:
-        #     self.deg += 5
-        # if key[pygame.K_d] and self.deg != -50:
-        #     self.deg -= 548'p8
+        a = random.randint(1, 1000)
+        if a > 500:
+            self.rect.x -= 4
+        if a < 500:
+            self.rect.x += 4
+
+        if self.rect.x < 0:
+            a = random.randint(1, 100)
+            if a < 0.1:
+                self.rect.x -= 4
+            if a > 0.1:
+                self.rect.x += 4
+
+        if self.rect.x > 450:
+            a = random.randint(1, 100)
+            if a < 0.1:
+                self.rect.x += 8
+            if a > 0.1:
+                self.rect.x -= 8
 
     def calc_vector(self):
         self.direction = (self.rect.center,

@@ -52,7 +52,7 @@ def read_config_json():
         return {
             "width": 450,
             "height": 450,
-            "framerate": 25,
+            "framerate": 30,
             "colors": {
                 "red": (255, 0, 0),
                 "green": (0, 255, 0),
