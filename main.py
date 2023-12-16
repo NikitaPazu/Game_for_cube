@@ -2,8 +2,6 @@ import pygame
 import file_utils
 import Sprites
 
-
-
 from Sprites.Spacehip import Spaceship
 from Sprites.Spaceship_bullet import Spaceship_bullet
 
@@ -26,7 +24,7 @@ screen = pygame.display.set_mode(
 )
 Spaceship = Spaceship()
 Enemy_Spaceship = Enemy_Spaceship()
-Spaceship_bullet = Spaceship_bullet()
+# Spaceship_bullet = Spaceship_bullet()
 Enemy_Space_ship_bullet = Enemy_Space_ship_bullet()
 Space = Space("Sprites/Assets/Space.jpg",
               Sprites.Space)
@@ -35,27 +33,35 @@ Space_group = pygame.sprite.Group()
 Spaceship_group = pygame.sprite.Group()
 Enemy_spaceship_group = pygame.sprite.Group()
 
-
 Spaceship_group.add(Spaceship)
-Spaceship_group.add(Spaceship_bullet)
+# Spaceship_group.add(Spaceship_bullet)
 
 Enemy_spaceship_group.add(Enemy_Spaceship)
-Enemy_spaceship_group.add(Enemy_Space_ship_bullet)
+# Enemdy_spaceship_group.add(Enemy_Space_ship_bullet)
 
 Space_group.add(Space)
-
 
 running = True
 
 clock = pygame.time.Clock()
+cooldown = 0
+ticks = 0
 
 while running:
     clock.tick(config['framerate'])
+    ticks += 1
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             obj = Spaceship.to_dict()
             file_utils.write_json(obj)
             running = False
+    key = pygame.key.get_pressed()
+
+    if key[pygame.K_SPACE] and ticks - cooldown >= 60:
+        cooldown = ticks
+        spaceship_bullet = Spaceship_bullet(x=Spaceship.rect.center[0])
+        Spaceship_group.add(spaceship_bullet)
+
     pygame.display.flip()
     Spaceship_group.update(Spaceship, Spaceship_bullet)
     Enemy_spaceship_group.update(Enemy_Spaceship, Enemy_Space_ship_bullet)
@@ -63,9 +69,6 @@ while running:
     screen.blit(Space.image, Space.rect)
     Spaceship_group.draw((screen))
     Enemy_spaceship_group.draw((screen))
-
-
-
 
 # Spaceship_group.add(Spaceship)
 

@@ -11,7 +11,6 @@ class Spaceship(pygame.sprite.Sprite):
         super().__init__(*groups)
 
         self.images = [
-            pygame.image.load("Sprites/Assets/spaceship.png"),
             pygame.image.load("Sprites/Assets/spaceship.png")
         ]
         self.images = list(map(
@@ -27,29 +26,29 @@ class Spaceship(pygame.sprite.Sprite):
         self.rect.center = (config['width'] // 2, config['height'] // 1.5)
 
         self.speed = 0
-        self.deg = 50  # -50d <= 0 <= 50d
-        self.direction = ((0, 0), (0, 0))
-        self.old_deg = 0
-        self.calc_vector()
-
+        # self.deg = 50  # -50d <= 0 <= 50d
+        # self.direction = ((0, 0), (0, 0))
+        # self.old_deg = 0
+        # self.calc_vector()
+    Spaceship_x = 0
     def update(self, *args, **kwargs):
         key = pygame.key.get_pressed()
-
-        # управление по X
+        Spaceship_x = self.rect.center
         if key[pygame.K_a]:
             self.rect.x -= 10
         if key[pygame.K_d]:
             self.rect.x += 10
+
+
         if self.rect.x < 0:
             self.rect.x += 255
-
         if self.rect.x > 450:
             self.rect.x -= 255
-    def calc_vector(self):
-        self.direction = (self.rect.center,
-                          (self.rect.center[0] + (self.deg if self.speed > 0 else 0),
-                           self.rect.center[1] + abs(self.speed))
-                          )
+    # def calc_vector(self):
+    #     self.direction = (self.rect.center,
+    #                       (self.rect.center[0] + (self.deg if self.speed > 0 else 0),
+    #                        self.rect.center[1] + abs(self.speed))
+    #                       )
 
     def draw_vector(self, screen: pygame.Surface):
         pygame.draw.line(screen,

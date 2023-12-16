@@ -11,13 +11,12 @@ class Enemy_Spaceship(pygame.sprite.Sprite):
         super().__init__(*groups)
 
         self.images = [
-            pygame.image.load("Sprites/Assets/enemy_space_ship.png"),
             pygame.image.load("Sprites/Assets/enemy_space_ship.png")
-        ]
+            ]
         self.images = list(map(
             lambda x: pygame.transform.scale(
                 pygame.transform.rotate(x, 0),
-                (256 // 4, 356 // 5)
+                (256 // 4, 350 // 5)
             ),
             self.images
         ))
@@ -27,55 +26,38 @@ class Enemy_Spaceship(pygame.sprite.Sprite):
         self.rect.center = (config['width'] // 2, config['height'] // 8)
 
         self.speed = 0
-        self.deg = 50  # -50d <= 0 <= 50d
         self.direction = ((0, 0), (0, 0))
-        self.old_deg = 0
-        self.calc_vector()
+        # self.calc_vector()
 
     def update(self, *args, **kwargs):
-        key = pygame.key.get_pressed()
-
-        # управление по Y
-        # if key[pygame.K_w]:
-        #     if self.speed < 20:
-        # self.speed += 1
-        # elif self.speed > 0:
-        #     self.speed -= 0.5
-        # if key[pygame.K_SPACE]:
-        #     if self.speed == 0:
-        #         self.image = self.images[0]
-        #     if self.speed != 0:
-        #         self.image = self.images[1]
-        #         self.speed -= 1 if self.speed > 0 else -1
-        # if key[pygame.K_s] and self.speed <= 0:
-        #     if self.speed > -5:
+        # key = pygame.key.get_pressed()
         self.speed += 2
         # управление по X
         a = random.randint(1, 1000)
         if a > 500:
-            self.rect.x -= 4
+            self.rect.x -= 5
         if a < 500:
-            self.rect.x += 4
+            self.rect.x += 5
 
         if self.rect.x < 0:
             a = random.randint(1, 100)
             if a < 0.1:
-                self.rect.x -= 4
+                self.rect.x -= 1
             if a > 0.1:
                 self.rect.x += 4
 
         if self.rect.x > 450:
             a = random.randint(1, 100)
             if a < 0.1:
-                self.rect.x += 8
+                self.rect.x += 1
             if a > 0.1:
                 self.rect.x -= 8
 
-    def calc_vector(self):
-        self.direction = (self.rect.center,
-                          (self.rect.center[0] + (self.deg if self.speed > 0 else 0),
-                           self.rect.center[1] + abs(self.speed))
-                          )
+    # def calc_vector(self):
+    #     self.direction = (self.rect.center,
+    #                       (self.rect.center[0] + (self.deg if self.speed > 0 else 0),
+    #                        self.rect.center[1] + abs(self.speed))
+    #                       )
 
     def draw_vector(self, screen: pygame.Surface):
         pygame.draw.line(screen,
