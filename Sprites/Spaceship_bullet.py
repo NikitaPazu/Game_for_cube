@@ -28,7 +28,7 @@ class Spaceship_bullet(pygame.sprite.Sprite):
 
         self.speed = 0
     def update(self, *args, **kwargs):
-        self.rect.y -= 4
+        self.rect.y -= 9
 
         if self.rect.y < 0:
             self.kill()

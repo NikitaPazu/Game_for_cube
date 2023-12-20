@@ -23,7 +23,7 @@ class Enemy_Spaceship(pygame.sprite.Sprite):
         self.image = self.images[0]
         self.rect = self.image.get_rect()
 
-        self.rect.center = (config['width'] // 2, config['height'] // 8)
+        self.rect.center = (random.randint(1, 450), config['height'] // 8)
 
         self.speed = 0
         self.direction = ((0, 0), (0, 0))
@@ -31,27 +31,28 @@ class Enemy_Spaceship(pygame.sprite.Sprite):
 
     def update(self, *args, **kwargs):
         # key = pygame.key.get_pressed()
-        self.speed += 2
+        self.speed = random.randint(0, 11)
         # управление по X
-        a = random.randint(1, 1000)
-        if a > 500:
-            self.rect.x -= 5
-        if a < 500:
-            self.rect.x += 5
+        # a = random.randint(1, 1000)
+        a = random.random()
+        if a > 0.5:
+            self.rect.x -= self.speed
+        if a <= 0.5:
+            self.rect.x += self.speed
 
         if self.rect.x < 0:
-            a = random.randint(1, 100)
-            if a < 0.1:
-                self.rect.x -= 1
-            if a > 0.1:
-                self.rect.x += 4
+            a = random.random()
+            if a < 0.5:
+                self.rect.x -= 0
+            if a > 0.5:
+                self.rect.x += 20
 
         if self.rect.x > 450:
-            a = random.randint(1, 100)
-            if a < 0.1:
-                self.rect.x += 1
-            if a > 0.1:
-                self.rect.x -= 8
+            a = random.random()
+            if a < 0.5:
+                self.rect.x += 0
+            if a > 0.5:
+                self.rect.x -= 20
 
     # def calc_vector(self):
     #     self.direction = (self.rect.center,

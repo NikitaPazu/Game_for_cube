@@ -17,13 +17,13 @@ bg = pygame.image.load("Sprites/Assets/space.jpg")
 pygame.init()
 pygame.font.init()
 
-font = pygame.font.SysFont(pygame.font.get_default_font(), 60)
+font = pygame.font.SysFont(pygame.font.get_default_font(), 30)
 
 screen = pygame.display.set_mode(
     (config['width'], config['height'])
 )
 Spaceship = Spaceship()
-Enemy_Spaceship = Enemy_Spaceship()
+enemy_spaceship = Enemy_Spaceship()
 # Spaceship_bullet = Spaceship_bullet()
 Enemy_Space_ship_bullet = Enemy_Space_ship_bullet()
 Space = Space("Sprites/Assets/Space.jpg",
@@ -36,7 +36,7 @@ Enemy_spaceship_group = pygame.sprite.Group()
 Spaceship_group.add(Spaceship)
 # Spaceship_group.add(Spaceship_bullet)
 
-Enemy_spaceship_group.add(Enemy_Spaceship)
+Enemy_spaceship_group.add(enemy_spaceship)
 # Enemdy_spaceship_group.add(Enemy_Space_ship_bullet)
 
 Space_group.add(Space)
@@ -46,6 +46,7 @@ running = True
 clock = pygame.time.Clock()
 cooldown = 0
 ticks = 0
+score = 0
 
 while running:
     clock.tick(config['framerate'])
@@ -57,25 +58,33 @@ while running:
             running = False
     key = pygame.key.get_pressed()
 
-    if key[pygame.K_SPACE] and ticks - cooldown >= 60:
+    if key[pygame.K_SPACE] and ticks - cooldown >= 25:
         cooldown = ticks
         spaceship_bullet = Spaceship_bullet(x=Spaceship.rect.center[0])
         Spaceship_group.add(spaceship_bullet)
 
-    pygame.display.flip()
+    hits = pygame.sprite.groupcollide(Spaceship_group, Enemy_spaceship_group, True, True)
+    if hits:
+        Enemy_spaceship_group.remove(enemy_spaceship)
+        enemy_spaceship = Enemy_Spaceship()
+        Enemy_spaceship_group.add(enemy_spaceship)
+        score += 1
+    if score >= 10:
+        pygame.quit()
+
+
     Spaceship_group.update(Spaceship, Spaceship_bullet)
-    Enemy_spaceship_group.update(Enemy_Spaceship, Enemy_Space_ship_bullet)
+    Enemy_spaceship_group.update(enemy_spaceship, Enemy_Space_ship_bullet)
     Space_group.update()
+
+    Score_render = font.render(f"Очки: {score}", True, (255, 255, 255))
     screen.blit(Space.image, Space.rect)
     Spaceship_group.draw((screen))
     Enemy_spaceship_group.draw((screen))
+    screen.blit(Score_render, (10, 10))
+    pygame.display.flip()
 
 # Spaceship_group.add(Spaceship)
 
-pygame.display.flip()
-
 pygame.quit()
-clock = pygame.time.Clock()
 
-# screen.fill(config['colors']['black'])  # вот это не работало (насколько я понял)
-# Enemy_Spaceship.image, Enemy_Spaceship.rect

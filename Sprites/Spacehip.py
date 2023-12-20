@@ -40,9 +40,9 @@ class Spaceship(pygame.sprite.Sprite):
             self.rect.x += 10
 
 
-        if self.rect.x < 0:
+        if self.rect.x <= 0:
             self.rect.x += 255
-        if self.rect.x > 450:
+        if self.rect.x >= 450:
             self.rect.x -= 255
     # def calc_vector(self):
     #     self.direction = (self.rect.center,
